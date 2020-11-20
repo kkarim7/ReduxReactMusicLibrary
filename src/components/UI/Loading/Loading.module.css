@@ -1,0 +1,48 @@
+.Loading {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.Loading div {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  animation: Loading 1.2s linear infinite;
+}
+.Loading div:nth-child(1) {
+  top: 8px;
+  left: -16px;
+  animation-delay: 0s;
+}
+.Loading div:nth-child(2) {
+  top: 8px;
+  left: 8px;
+  animation-delay: -0.4s;
+}
+.Loading div:nth-child(3) {
+  top: 8px;
+  left: 32px;
+  animation-delay: -0.8s;
+}
+.Loading div:nth-child(4) {
+  top: 8px;
+  left: 56px;
+  animation-delay: -0.4s;
+}
+.Loading div:nth-child(5) {
+  top: 8px;
+  left: 80px;
+  animation-delay: -0.8s;
+}
+@keyframes Loading {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

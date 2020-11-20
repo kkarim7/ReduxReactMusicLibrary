@@ -1,0 +1,130 @@
+.PlayBar {
+  height: 45px;
+  width: 100%;
+  position: fixed;
+  bottom: -2px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  box-sizing: border-box;
+  border-top: 1px solid #101216;
+  z-index: 90;
+  background-color: #1e2127;
+  color: grey;
+  transition: transform 0.3s ease-out;
+}
+
+img {
+  cursor: pointer;
+}
+
+.OpenPlayBar {
+  transform: translateY(0px);
+}
+
+.ClosePlayBar {
+  transform: translateY(-50px);
+}
+
+.AudioControlsContainer {
+  display: inline-flex;
+  width: 100%;
+}
+
+.AudioControlIcons {
+  width: 35px;
+  height: 35px;
+}
+
+.AudioControlIcons:hover {
+  cursor: pointer;
+}
+
+.VolumeIcons {
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 25px;
+  height: 25px;
+  align-self: center;
+}
+
+.AudioSlider {
+  margin-left: 15px;
+  align-self: center;
+  height: 5px;
+  width: 45vw;
+  background: #555;
+  border-radius: 15px;
+}
+
+.AudioSliderDuration {
+  align-self: center;
+  margin-left: 20px;
+}
+
+.VolumeSliderInput {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: 15px;
+  background: #555;
+  align-self: baseline;
+  height: 5px;
+  width: 150px;
+  border-radius: 15px;
+}
+
+.VolumeSliderInput {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: 15px;
+  background: #555;
+  align-self: baseline;
+  height: 5px;
+  width: 150px;
+  border-radius: 15px;
+}
+
+.VolumeSliderInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #764abc;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.VolumeSliderInput::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  background: #764abc;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+@media (max-width: 500px) {
+  .VolumeSliderInput {
+    display: none;
+  }
+
+  .VolumeIcons {
+    display: none;
+  }
+
+  .AudioSlider {
+    margin-left: 10px;
+    align-self: center;
+    height: 5px;
+    width: 45vw;
+    background: #555;
+    border-radius: 15px;
+  }
+
+  .AudioSliderDuration {
+    align-self: center;
+    margin-left: 2px;
+    margin-right: none;
+  }
+}

@@ -1,0 +1,38 @@
+.Card {
+  box-shadow: 0 2px 4px 0 black;
+  transition: transform 100ms;
+  background-color: #1e2127;
+  display: inline-block;
+  padding: 5px;
+  color: grey;
+  margin: 15px;
+  width: 200px;
+  height: auto; /* 290px; */
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.Card:hover {
+  transform: scale(1.2);
+}
+
+@media (max-width: 500px) {
+  .Card {
+    box-shadow: 0 2px 4px 0 black;
+    transition: 200ms;
+    background-color: #1e2127;
+    display: inline-block;
+    padding: 5px;
+    color: grey;
+    margin: 15px;
+    width: 150px; /* 350 */
+    height: auto;
+  }
+
+  .Card:hover {
+    transform: scale(1.05);
+  }
+}

@@ -1,0 +1,47 @@
+.SpotlightRouteTitle {
+  font-size: small;
+  display: flex;
+  margin-left: 25px;
+  color: grey;
+}
+
+.SpotlightFeatured {
+  font-size: normal;
+  display: flex;
+  margin-top: 10px;
+  margin-left: 25px;
+  margin-bottom: 35px;
+  color: rgb(160, 160, 160);
+}
+
+.SpotlightTrackInfo {
+  font-size: small;
+  display: flex;
+  text-align: left;
+  color: grey;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 500px) {
+  .SpotlightRouteTitle {
+    font-size: large;
+    display: flex;
+    margin-left: 25px;
+    color: grey;
+  }
+  
+  .SpotlightFeatured {
+    font-size: xx-large;
+    display: flex;
+    margin-top: 10px;
+    margin-left: 25px;
+    margin-bottom: 35px;
+    color: rgb(160, 160, 160);
+  }
+
+  .Columns {
+    column-count: 2;
+    column-gap: 0.5px;
+  }
+}
