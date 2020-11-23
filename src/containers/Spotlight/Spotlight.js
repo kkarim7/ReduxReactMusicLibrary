@@ -62,6 +62,7 @@ class Spotlight extends Component {
       <div>
         <small className={classes.SpotlightRouteTitle}>Spotlight/</small>
         <p className={classes.SpotlightFeatured}>Featured Tracks</p>
+
         <div className={classes.Columns}>{cards}</div>
         {this.props.playCtrlBar ? (
           <PlayBar

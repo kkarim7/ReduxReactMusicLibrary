@@ -36,6 +36,12 @@ const PlayBar = (props) => {
   let trackCurrentTime = document.getElementById(localStorage.getItem("id"))
     .currentTime;
 
+  const setTrackTime = () => {
+    let trackId = localStorage.getItem("id");
+    let selectedTrack = document.getElementById(trackId);
+    selectedTrack.currentTime = props.trackTime;
+  };
+
   const [currSec, setCurrSec] = useState();
 
   useEffect(() => {
@@ -49,17 +55,7 @@ const PlayBar = (props) => {
     currentTime = new Date(currSec * 1000).toISOString().substr(14, 5);
   }
 
-  let minutes = parseInt(trackDuration / 60, 10);
-  let seconds = parseInt(trackDuration % 60);
-
-  if (minutes < 10) {
-    minutes = "0" + minutes;
-  }
-  if (seconds.toString().length < 2) {
-    seconds += "0";
-  }
-
-  let duration = minutes + ":" + seconds;
+  let duration = new Date(trackDuration * 1000).toISOString().substr(14, 5);
 
   const setPrevTrack = () => {
     let trackId = localStorage.getItem("id");
@@ -67,12 +63,16 @@ const PlayBar = (props) => {
       document.getElementById(trackId).currentTime = 0;
       return;
     }
+    if (document.getElementById(trackId).paused) {
+      props.onPauseClicked();
+    }
     let audioTrack = document.getElementById(trackId);
     audioTrack.pause();
     let keepAudioVol = audioTrack.volume;
     let prevTrackId = parseInt(trackId) - 1;
     localStorage.setItem("id", prevTrackId);
     let prevAudioTrack = document.getElementById(prevTrackId);
+    prevAudioTrack.currentTime = 0;
     prevAudioTrack.volume = keepAudioVol;
     prevAudioTrack.play();
   };
@@ -80,10 +80,13 @@ const PlayBar = (props) => {
   const setNextTrack = () => {
     let trackId = localStorage.getItem("id");
     let fullAudioList = document.querySelectorAll("audio").length;
-    if ((fullAudioList - 1) === parseInt(trackId)) {
+    if (fullAudioList - 1 === parseInt(trackId)) {
       document.getElementById(trackId).currentTime = trackDuration;
       props.onPauseClicked();
       return;
+    }
+    if (document.getElementById(trackId).paused) {
+      props.onPauseClicked();
     }
     let audioTrack = document.getElementById(trackId);
     audioTrack.pause();
@@ -91,6 +94,7 @@ const PlayBar = (props) => {
     let nextTrackId = parseInt(trackId) + 1;
     localStorage.setItem("id", nextTrackId);
     let nextAudioTrack = document.getElementById(nextTrackId);
+    nextAudioTrack.currentTime = 0;
     nextAudioTrack.volume = keepAudioVol;
     nextAudioTrack.play();
   };
@@ -165,13 +169,30 @@ const PlayBar = (props) => {
                   <path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v.2c0 .38.25.71.6.85C17.18 6.53 19 9.06 19 12s-1.82 5.47-4.4 6.5c-.36.14-.6.47-.6.85v.2c0 .63.63 1.07 1.21.85C18.6 19.11 21 15.84 21 12s-2.4-7.11-5.79-8.4c-.58-.23-1.21.22-1.21.85z" />
                 </svg>
               </i>
-              <div className={classes.AudioSlider}></div>
+              <div>
+                <input
+                  className={classes.AudioSlider}
+                  min="0"
+                  max={trackDuration}
+                  step="0.1"
+                  type="range"
+                  value={
+                    document.getElementById(localStorage.getItem("id"))
+                      .currentTime
+                  }
+                  onChange={(e) => {
+                    setTrackTime();
+                    props.onTrackTimeChange(+e.target.value);
+                  }}
+                />
+              </div>
               <div className={classes.AudioSliderDuration}>
                 <small>
-                  {currentTime} / {duration}
+                  {window.outerWidth < 500
+                    ? currentTime
+                    : currentTime + " / " + duration}
                 </small>
-              </div>{" "}
-              {/* THIS IS FOR THE SEEK BAR */}
+              </div>
             </div>
           ) : (
             <div className={classes.AudioControlsContainer}>
@@ -235,10 +256,28 @@ const PlayBar = (props) => {
                   <path d="M3 10v4c0 .55.45 1 1 1h3l3.29 3.29c.63.63 1.71.18 1.71-.71V6.41c0-.89-1.08-1.34-1.71-.71L7 9H4c-.55 0-1 .45-1 1zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 4.45v.2c0 .38.25.71.6.85C17.18 6.53 19 9.06 19 12s-1.82 5.47-4.4 6.5c-.36.14-.6.47-.6.85v.2c0 .63.63 1.07 1.21.85C18.6 19.11 21 15.84 21 12s-2.4-7.11-5.79-8.4c-.58-.23-1.21.22-1.21.85z" />
                 </svg>
               </i>
-              <div className={classes.AudioSlider}></div>
+              <div>
+                <input
+                  className={classes.AudioSlider}
+                  min="0"
+                  max={trackDuration}
+                  step="0.1"
+                  type="range"
+                  value={
+                    document.getElementById(localStorage.getItem("id"))
+                      .currentTime
+                  }
+                  onChange={(e) => {
+                    setTrackTime();
+                    props.onTrackTimeChange(+e.target.value);
+                  }}
+                />
+              </div>
               <div className={classes.AudioSliderDuration}>
                 <small>
-                  {currentTime} / {duration}
+                  {window.outerWidth < 500
+                    ? currentTime
+                    : currentTime + " / " + duration}
                 </small>
               </div>{" "}
               {/* THIS IS FOR THE SEEK BAR */}
@@ -258,6 +297,7 @@ const mapStateToProps = (state) => {
     trackId: state.trackId,
     trackVol: state.trackVol,
     playBar: state.playBar,
+    trackTime: state.trackTime,
   };
 };
 
@@ -266,6 +306,8 @@ const mapDispatchToProps = (dispatch) => {
     onCardClicked: (id) => dispatch({ type: "TOGGLE_PLAY_BAR", id: id }),
     onPauseClicked: () => dispatch({ type: "TOGGLE_PLAY_PAUSE_ICON" }),
     onVolChange: (vol) => dispatch({ type: "CHANGE_VOL", volume: vol }),
+    onTrackTimeChange: (time) =>
+      dispatch({ type: "CHANGE_CURRENT_TIME", time: time }),
   };
 };
 

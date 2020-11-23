@@ -8,6 +8,7 @@ const initialState = {
   playMusic: false,
   trackId: null,
   trackVol: 0.5,
+  trackTime: 0.0,
   musicCards: [
     {
       artist: "Whethan",
@@ -74,6 +75,12 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       trackVol: action.volume,
+    };
+  }
+  if (action.type === "CHANGE_CURRENT_TIME") {
+    return {
+      ...state,
+      trackTime: action.time,
     };
   }
   return state;
