@@ -5,9 +5,13 @@ This application is meant to have an integrated music library and utilize the mp
 # Features
 
 ### Pop up cards when hovered over. ###
+![](popUpCards.gif)
 
 ### Click to play. ###
+![](clickPlay.gif)
 
 ### Music Player features such as play/pause, skip track, previous track. ###
+![](musicPlayer.gif)
 
-### Audio Scrubber. ###
+### Audio Scrubber and Volume Slider. ###
+![](audioScrubber.gif)
